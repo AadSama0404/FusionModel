@@ -41,29 +41,3 @@ class TmbDataset(Dataset):
         data_shuffled = data[random_indices]
 
         return data_shuffled, response
-
-class TmbDataset_Cox(Dataset):
-    def __init__(self, bag_list):
-        self.data = bag_list
-    def __len__(self):
-        return len(self.data)
-    def __getitem__(self, idx):
-        sample = self.data[idx]
-        study_id = int(sample[0])
-        PFS = float(sample[2])
-        Status = int(sample[3])
-        lable = float(sample[4])
-        bag_data = sample[5]
-        data = []
-        response = []
-        response.append(lable)
-        response.append(study_id)
-        response.append(PFS)
-        response.append(Status)
-        for instance in bag_data:
-            row = [instance[0],
-                   instance[1],
-                   instance[2]]
-            data.append(row)
-        data = torch.tensor(data, dtype=torch.float)
-        return data, response
