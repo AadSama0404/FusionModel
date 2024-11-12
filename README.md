@@ -25,7 +25,7 @@ python main.py
 ```
 
 ## Output and Analysis
-The test output of **Fusion Model** is two files: Output.csv and A_matrix.txt. The pictures in the Preformence folder are generated based on these data. The file structure and the meaning of each column are as follows.
+The test output of **Fusion Model** is two files: Output.csv and A_matrix.txt. The pictures in the [Preformence](https://github.com/AadSama0404/FusionModel/tree/main/Performance) folder are generated based on these data. The file structure and the meaning of each column are as follows.
 ```
 Output.csv 
 ├── Y
