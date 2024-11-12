@@ -81,7 +81,7 @@ def Test(data_set_name):
             test_error[study_index] = test_error[study_index] + error
             test_error_all = test_error_all + error
             batch_count[study_index] = batch_count[study_index] + 1
-            label_prediction_list.append([label.item(), predicted_prob.item(), predicted_label.item(), study_id])
+            label_prediction_list.append([label.item(), predicted_prob.item(), predicted_label.item(), subgroup_id])
             ccf_column = data[0][:, 1]
             _, ccf_index = torch.sort(ccf_column, descending=True)
             for i in range(A.shape[1]):
