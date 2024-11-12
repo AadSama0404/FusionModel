@@ -1,13 +1,23 @@
 # FusionModel
 
-# Contents
-- [Model Framework](#Model Framework)
+## Contents
+- [Background and Framework](#Background and Framework)
 - [Installation and Usage](#Installation and Usage)
-	- [AAA](#aaa)
-	- [bbb](#bbb)
-- [Examples and Tutorials](#Examples and Tutorials)
+        - [Installation](#Installation)
+        - [Data Preprocess](#Data Preprocess)
+	- [Train](#Train)
+- [Examples and Analysis](#Examples and Analysis)
 
- 
+### Background and Framework
+
+### Installation and Usage
+
+##### Installation
+
+##### Data Preprocess
 python data_preprocess.py
 
+##### Train
 python main.py
+
+### Examples and Analysis
