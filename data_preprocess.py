@@ -135,8 +135,8 @@ def Scaling_Calculations(raw_data_train):
         else:
             print("error!")
             divisors.append(np.nan)
-    print(divisors)
     return divisors
+
 def Mutation_to_Feature(raw_data, divisors):
     for row in raw_data:
         study = int(row[0])  # Convert to integer for indexing
