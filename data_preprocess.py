@@ -123,8 +123,8 @@ def Scaling_Calculations(raw_data_train):
         if len(lst) > 0:
             q1 = np.percentile(lst, 25)
             q3 = np.percentile(lst, 75)
-            qr = q3 - q1
-            threshold = q3 + 1.5 * qr
+            iqr = q3 - q1
+            threshold = q3 + 1.5 * iqr
 
             if threshold < 20:
                 rounded_threshold = round(threshold / 5) * 5
