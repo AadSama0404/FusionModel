@@ -3,7 +3,7 @@
 ## Content
 - [Background and Framework](https://github.com/AadSama0404/FusionModel/blob/main/README.md#background-and-framework)
 - [Installation and Usage](https://github.com/AadSama0404/FusionModel/blob/main/README.md#installation-and-usage)
-- [Examples and Analysis](https://github.com/AadSama0404/FusionModel/blob/main/README.md#examples-and-analysis)
+- [Output and Analysis](https://github.com/AadSama0404/FusionModel/blob/main/README.md#output-and-analysis)
 
 ## Background and Framework
 **Fusion Model** is an interpretable clone-based prognostic prediction model for patient cohorts comprising heterogeneous subgroups. It outputs a binary prediction indicating non-response (0) or response (1) as well as the corresponding probability of response between 0 and 1 which called the sample-score.
@@ -24,4 +24,21 @@ python data_preprocess.py
 python main.py
 ```
 
-## Examples and Analysis
+## Output and Analysis
+The test output of **Fusion Model** is two files: Output.csv and A_matrix.txt. The pictures in the Preformence folder are generated based on these data. The file structure and the meaning of each column are as follows.
+```
+Output.csv 
+├── Y
+├── Sample score
+├── Predicted Label
+├── PFS
+├── Status
+├── Subgroup ID
+```
+```
+A_matrix.txt 
+├── Weights of Clones
+├── Order of Clones
+├── Predicted Label
+├── Subgroup ID
+```
