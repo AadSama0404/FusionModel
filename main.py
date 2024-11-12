@@ -59,14 +59,14 @@ def Test(data_set_name):
     if data_set_name == "train":
         data_set = train_loader
     A_matrix = np.zeros((len(data_set), 2 * max_clone + 2), dtype=float)
-    study_list = []
+    subgroup_list = []
     PFS_list = []
     Status_list = []
     with torch.no_grad():
         for batch_idx, (data, response) in enumerate(data_set):
-            study_id = response[1].item()
-            study_list.append(study_id)
-            study_index = study_id - 1
+            subgroup_id = response[1].item()
+            subgroup_list.append(subgroup_id)
+            study_index = subgroup_id - 1
             label = response[0]
             PFS = response[2].item()
             Status = response[3].item()
@@ -87,8 +87,8 @@ def Test(data_set_name):
             for i in range(A.shape[1]):
                 A_matrix[batch_idx][i] = np.round(A[0][i].detach().numpy(), 4)
                 A_matrix[batch_idx][max_clone + i] = ccf_index[i] + 1
-            A_matrix[batch_idx][2 * max_clone] = label
-            A_matrix[batch_idx][2 * max_clone + 1] = study_id
+            A_matrix[batch_idx][2 * max_clone] = predicted_label
+            A_matrix[batch_idx][2 * max_clone + 1] = subgroup_id
 
     true_labels = [true_label for true_label, _, _, _ in label_prediction_list]
     predicted_probabilities = [predicted_prob for _, predicted_prob, _, _ in label_prediction_list]
@@ -107,15 +107,14 @@ def Test(data_set_name):
         print('Accuracy: {:.4f}'.format(accuracy))
         print('Precision: {:.4f}, Recall: {:.4f}, F1 Score: {:.4f}'.format(precision, recall, f1))
         print('AUC: {:.4f}'.format(auc))
-        np.savetxt("A_matrix.txt", A_matrix, fmt='%.4f')
-        fpr, tpr, thread = roc_curve(true_labels, predicted_probabilities)
+        np.savetxt("Clone_weight.txt", A_matrix, fmt='%.4f')
         roc_data = pd.DataFrame({
             'Y': true_labels,
             'Sample score': predicted_probabilities,
             'Group': predicted_labels,
             'PFS': PFS_list,
             'Status': Status_list,
-            'Subgroup ID': study_list
+            'Subgroup ID': subgroup_list
         })
         roc_data.to_csv('Output.csv', index=False)
     return [test_loss.cpu().numpy(), test_error, auc]
@@ -124,8 +123,8 @@ def Train():
     for i in range(subgroup_num):
         models[i].train()
     for batch_idx, (data, response) in enumerate(train_loader):
-        study_id = response[1].item()
-        study_index = study_id - 1
+        subgroup_id = response[1].item()
+        subgroup_index = subgroup_id - 1
         label = response[0]
         data = torch.tensor(data, dtype=torch.float)
         label = torch.tensor(label, dtype=torch.float)
@@ -139,10 +138,10 @@ def Train():
             error.append(error_i)
             theta_X.append(predicted_prob_i)
 
-        loss_all = (loss[0] * S[study_index][0] + \
-                    loss[1] * S[study_index][1] + \
-                    loss[2] * S[study_index][2] + \
-                    loss[3] * S[study_index][3] + \
+        loss_all = (loss[0] * S[subgroup_index][0] + \
+                    loss[1] * S[subgroup_index][1] + \
+                    loss[2] * S[subgroup_index][2] + \
+                    loss[3] * S[subgroup_index][3] + \
                     (param_gamma) * theta_X[0]**2 * L[0][0] +\
                                     theta_X[1]**2 * L[1][1] +\
                                     theta_X[2]**2 * L[2][2] +\
