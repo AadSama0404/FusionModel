@@ -36,7 +36,7 @@ Output.csv
 ├── Subgroup ID
 ```
 ```
-A_matrix.txt 
+Clone_weight.txt 
 ├── Weights of Clones
 ├── Order of Clones
 ├── Predicted Label
