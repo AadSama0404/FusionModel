@@ -18,7 +18,7 @@ git clone https://github.com/AadSama0404/FusionModel.git
 ```sh
 pip install -r requirements.txt
 ```
-**Data preprocessing and model training**
+**Data Preprocessing and Model Training**
 ```sh
 python data_preprocess.py
 python main.py
