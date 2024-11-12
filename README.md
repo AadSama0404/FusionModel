@@ -1,7 +1,7 @@
 # FusionModel
 
 ## Background and Framework
-**Fusion Model** is an interpretable clone-based prognostic prediction model for patient cohorts comprising heterogeneous subgroups. It outputs a binary prediction indicating non-response (0) or response (1) as well as the corresponding probability of response between 0 and 1 which we call the sample-score.
+**Fusion Model** is an interpretable clone-based prognostic prediction model for patient cohorts comprising heterogeneous subgroups. It outputs a binary prediction indicating non-response (0) or response (1) as well as the corresponding probability of response between 0 and 1 which called the sample-score.
 ![Overview.png](https://github.com/AadSama0404/FusionModel/blob/main/Overview.png)
 
 ## Installation and Usage
